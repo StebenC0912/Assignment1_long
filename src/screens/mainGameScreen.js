@@ -17,6 +17,7 @@ let min = 0;
 let currentGuess;
 let i = 0;
 let data = [];
+let copyData = [];
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min - 1)) + min + 1;
 }
@@ -24,7 +25,10 @@ function MainGameScreen(props) {
   const navigate = () => {
     max = 100;
     min = 0;
-
+    i++;
+    while (copyData.length > 0) {
+      copyData.pop();
+    }
     // clear the history
     data.forEach((element) => {
       data.pop();
@@ -53,6 +57,14 @@ function MainGameScreen(props) {
     setCurrentGuess(randomInt(min, max));
     i++;
     data.push({ name: currentGuess, key: i });
+    while (copyData.length > 0) {
+      copyData.pop();
+    }
+    // reverse the array
+    data.forEach((element) => {
+      copyData.push(element);
+    });
+    copyData.reverse();
   };
   return (
     <View
@@ -109,7 +121,7 @@ function MainGameScreen(props) {
         <View style={mainGameStyle.flatListStyle}>
           <FlatList
             style={{ width: "100%" }}
-            data={data}
+            data={copyData}
             renderItem={({ item }) =>
               HistoryItem({ guess: item.name, key: item.key })
             }
