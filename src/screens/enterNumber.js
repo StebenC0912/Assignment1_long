@@ -47,7 +47,7 @@ function EnterNumber(props) {
             <Text style={enterNumberStyle.textButtonLeft}>Start</Text>
           </Pressable>
         </View>
-      </SafeAreaView>
+      </SafeAreaView> 
     </View>
   );
 }
